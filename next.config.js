@@ -215,7 +215,14 @@ const nextConfig = {
     return config
   },
   experimental: {
-    scrollRestoration: true
+    scrollRestoration: true,
+    optimizePackageImports: [
+      'lucide-react',
+      'font-awesome',
+      '@fortawesome/fontawesome-free',
+      '@headlessui/react',
+      'lodash'
+    ]
   },
   exportPathMap: async function (
     defaultPathMap,

@@ -69,6 +69,48 @@ const Style = () => {
         scrollbar-color: #49b1f5 transparent
     }
     
+    /* 移动端交互增强 */
+    @media (max-width: 1024px) {
+        /* 点击时的背景高亮反馈 */
+        a:active, 
+        button:active, 
+        .cursor-pointer:active {
+            background-color: rgba(146, 140, 238, 0.1);
+            transition: background-color 0.1s;
+        }
+        
+        /* 移除移动端默认的点击蓝色高亮 */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* 增加按钮点击时的微缩放效果 */
+        .menu-link:active,
+        .cursor-pointer:active {
+            transform: scale(0.98);
+        }
+    }
+    
+    /* 侧边栏菜单点击态 */
+    #nav-mobile .menu-link:active {
+        color: #928CEE;
+        font-weight: bold;
+    }
+
+    /* 自定义更慢的跳动动画 */
+    @keyframes slow-bounce {
+        0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+    .animate-slow-bounce {
+        animation: slow-bounce 2s infinite;
+    }
 
   `}</style>)
 }

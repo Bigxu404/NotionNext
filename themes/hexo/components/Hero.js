@@ -35,7 +35,14 @@ const Hero = props => {
               backSpeed: 100,
               backDelay: 400,
               showCursor: true,
-              smartBackspace: true
+              smartBackspace: true,
+              onComplete: (self) => {
+                setTimeout(() => {
+                  if (self?.cursor) {
+                    self.cursor.style.display = 'none'
+                  }
+                }, 1500)
+              }
             })
           )
         }
@@ -79,11 +86,11 @@ const Hero = props => {
         <div
           onClick={scrollToWrapper}
           className='z-10 cursor-pointer w-full text-center py-4 text-3xl absolute bottom-10 text-white'>
-          <div className='opacity-70 animate-bounce text-xs'>
+          <div className='opacity-70 animate-slow-bounce text-xs'>
             {siteConfig('HEXO_SHOW_START_READING', null, CONFIG) &&
               locale.COMMON.START_READING}
           </div>
-          <i className='opacity-70 animate-bounce fas fa-angle-down' />
+          <i className='opacity-70 animate-slow-bounce fas fa-angle-down' />
         </div>
       </div>
 
