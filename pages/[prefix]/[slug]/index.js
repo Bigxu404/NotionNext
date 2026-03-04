@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData, getPost } from '@/lib/db/getSiteData'
+import { checkStrIsNotionId, checkStrIsUuid } from '@/lib/utils'
 import { checkSlugHasOneSlash, processPostData } from '@/lib/utils/post'
 import { idToUuid } from 'notion-utils'
 import Slug from '..'
@@ -51,16 +52,21 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
 
   // 在列表内查找文章
   props.post = props?.allPages?.find(p => {
+    const postSlug = p.slug?.startsWith('/') ? p.slug.substring(1) : p.slug
     return (
       p.type.indexOf('Menu') < 0 &&
-      (p.slug === slug || p.slug === fullSlug || p.id === idToUuid(fullSlug))
+      (postSlug === slug || 
+       postSlug === fullSlug || 
+       postSlug === prefix ||
+       p.id === idToUuid(fullSlug) ||
+       p.id === idToUuid(slug))
     )
   })
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
-    const pageId = slug.slice(-1)[0]
-    if (pageId.length >= 32) {
+    const pageId = slug
+    if (pageId.length >= 32 && (checkStrIsUuid(pageId) || checkStrIsNotionId(pageId))) {
       const post = await getPost(pageId)
       props.post = post
     }

@@ -6,6 +6,7 @@ import { getGlobalData, getPost } from '@/lib/db/getSiteData'
 import { useGlobal } from '@/lib/global'
 import { getPageTableOfContents } from '@/lib/notion/getPageTableOfContents'
 import { getPasswordQuery } from '@/lib/password'
+import { checkStrIsNotionId, checkStrIsUuid } from '@/lib/utils'
 import { checkSlugHasNoSlash, processPostData } from '@/lib/utils/post'
 import { DynamicLayout } from '@/themes/theme'
 import md5 from 'js-md5'
@@ -126,16 +127,17 @@ export async function getStaticProps({ params: { prefix }, locale }) {
 
   // 在列表内查找文章
   props.post = props?.allPages?.find(p => {
+    const postSlug = p.slug?.startsWith('/') ? p.slug.substring(1) : p.slug
     return (
       p.type.indexOf('Menu') < 0 &&
-      (p.slug === prefix || p.id === idToUuid(prefix))
+      (postSlug === prefix || p.id === idToUuid(prefix))
     )
   })
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
     const pageId = prefix
-    if (pageId.length >= 32) {
+    if (pageId.length >= 32 && (checkStrIsUuid(pageId) || checkStrIsNotionId(pageId))) {
       const post = await getPost(pageId)
       props.post = post
     }
