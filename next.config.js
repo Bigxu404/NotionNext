@@ -210,9 +210,9 @@ const nextConfig = {
 
     if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
       const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
-      config.resolve.alias['@clerk/nextjs'] = clerkStub
+      config.resolve.alias['@clerk/nextjs$'] = clerkStub
       config.resolve.alias['@clerk/nextjs/server'] = clerkStub
-      config.resolve.alias['@clerk/localizations'] = clerkStub
+      config.resolve.alias['@clerk/localizations$'] = clerkStub
     }
 
     if (process.env.NODE_ENV_API === 'development') {
