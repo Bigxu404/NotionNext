@@ -208,11 +208,17 @@ const nextConfig = {
       THEME
     )
 
-    if (!BLOG.ENABLE_CLERK) {
-      const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
-      config.resolve.alias['@clerk/nextjs$'] = clerkStub
-      config.resolve.alias['@clerk/nextjs/server'] = clerkStub
-      config.resolve.alias['@clerk/localizations$'] = clerkStub
+    const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
+    config.resolve.alias['@clerk/nextjs$'] = clerkStub
+    config.resolve.alias['@clerk/nextjs/server'] = clerkStub
+    config.resolve.alias['@clerk/localizations$'] = clerkStub
+    config.resolve.alias['@clerk/clerk-react$'] = clerkStub
+    config.resolve.alias['@clerk/shared$'] = clerkStub
+    config.resolve.alias['@clerk/shared/react$'] = clerkStub
+    config.resolve.alias['@clerk/backend$'] = clerkStub
+    config.resolve.alias['@clerk/types$'] = clerkStub
+    if (!isServer) {
+      console.log('[Clerk] All @clerk/* packages aliased to stub')
     }
 
     if (process.env.NODE_ENV_API === 'development') {
