@@ -66,7 +66,10 @@ const BLOG = {
     '随性创造，让思考留有痕迹.',
 
   // uuid重定向至 slug
-  UUID_REDIRECT: process.env.UUID_REDIRECT || false
+  UUID_REDIRECT: process.env.UUID_REDIRECT || false,
+
+  // Clerk 认证
+  ENABLE_CLERK: process.env.NEXT_PUBLIC_ENABLE_CLERK || false
 }
 
 module.exports = BLOG
