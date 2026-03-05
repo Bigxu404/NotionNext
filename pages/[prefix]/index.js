@@ -116,7 +116,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { prefix }, locale }) {
-  let fullSlug = prefix
+  const cleanPrefix = prefix.replace(/\.html$/, '')
+  let fullSlug = cleanPrefix
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
   if (siteConfig('PSEUDO_STATIC', false, props.NOTION_CONFIG)) {
@@ -130,13 +131,13 @@ export async function getStaticProps({ params: { prefix }, locale }) {
     const postSlug = p.slug?.startsWith('/') ? p.slug.substring(1) : p.slug
     return (
       p.type.indexOf('Menu') < 0 &&
-      (postSlug === prefix || p.id === idToUuid(prefix))
+      (postSlug === cleanPrefix || p.id === idToUuid(cleanPrefix))
     )
   })
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
-    const pageId = prefix
+    const pageId = cleanPrefix
     if (pageId.length >= 32 && (checkStrIsUuid(pageId) || checkStrIsNotionId(pageId))) {
       const post = await getPost(pageId)
       props.post = post

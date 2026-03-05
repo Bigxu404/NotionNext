@@ -54,25 +54,28 @@ export async function getStaticProps({
   params: { prefix, slug, suffix },
   locale
 }) {
-  const fullSlug = prefix + '/' + slug + '/' + suffix.join('/')
+  const cleanSuffix = suffix.map(s => s.replace(/\.html$/, ''))
+  const fullSlug = prefix + '/' + slug + '/' + cleanSuffix.join('/')
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
 
   // 在列表内查找文章
   props.post = props?.allPages?.find(p => {
     const postSlug = p.slug?.startsWith('/') ? p.slug.substring(1) : p.slug
+    const lastSegment = cleanSuffix[cleanSuffix.length - 1]
     return (
       p.type.indexOf('Menu') < 0 &&
-      (postSlug === suffix.join('/') ||
-        postSlug === fullSlug.substring(fullSlug.lastIndexOf('/') + 1) ||
+      (postSlug === cleanSuffix.join('/') ||
+        postSlug === lastSegment ||
         postSlug === fullSlug ||
-        p.id === idToUuid(fullSlug))
+        p.id === idToUuid(fullSlug) ||
+        p.id === idToUuid(lastSegment))
     )
   })
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
-    const pageId = fullSlug.substring(fullSlug.lastIndexOf('/') + 1)
+    const pageId = cleanSuffix[cleanSuffix.length - 1]
     if (pageId.length >= 32 && (checkStrIsUuid(pageId) || checkStrIsNotionId(pageId))) {
       const post = await getPost(pageId)
       props.post = post
