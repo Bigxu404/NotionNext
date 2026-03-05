@@ -208,7 +208,7 @@ const nextConfig = {
       THEME
     )
 
-    if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+    if (!BLOG.ENABLE_CLERK) {
       const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
       config.resolve.alias['@clerk/nextjs$'] = clerkStub
       config.resolve.alias['@clerk/nextjs/server'] = clerkStub
