@@ -116,6 +116,14 @@ const NotionPage = ({ post, className }) => {
     return () => clearTimeout(timer)
   }, [post])
 
+  if (!post?.blockMap?.block || Object.keys(post.blockMap.block).length === 0) {
+    return (
+      <div id='notion-article' className={`mx-auto ${className || ''}`}>
+        <p className='text-gray-500 text-center py-8'>{post?.title || '内容加载中...'}</p>
+      </div>
+    )
+  }
+
   return (
     <div
       id='notion-article'
