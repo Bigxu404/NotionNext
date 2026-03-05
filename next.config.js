@@ -197,7 +197,6 @@ const nextConfig = {
         ]
       },
   webpack: (config, { dev, isServer }) => {
-    // 动态主题：添加 resolve.alias 配置，将动态路径映射到实际路径
     config.resolve.alias['@'] = path.resolve(__dirname)
 
     if (!isServer) {
@@ -208,7 +207,14 @@ const nextConfig = {
       'themes',
       THEME
     )
-    // Enable source maps in development mode
+
+    if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+      const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
+      config.resolve.alias['@clerk/nextjs'] = clerkStub
+      config.resolve.alias['@clerk/nextjs/server'] = clerkStub
+      config.resolve.alias['@clerk/localizations'] = clerkStub
+    }
+
     if (process.env.NODE_ENV_API === 'development') {
       config.devtool = 'source-map'
     }
