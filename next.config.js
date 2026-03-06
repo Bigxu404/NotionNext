@@ -217,6 +217,13 @@ const nextConfig = {
     config.resolve.alias['@clerk/shared/react$'] = clerkStub
     config.resolve.alias['@clerk/backend$'] = clerkStub
     config.resolve.alias['@clerk/types$'] = clerkStub
+
+    const clerkDir = path.join(__dirname, 'node_modules', '@clerk')
+    if (fs.existsSync(clerkDir)) {
+      console.log('[DEBUG] @clerk IN node_modules:', fs.readdirSync(clerkDir))
+    } else {
+      console.log('[DEBUG] @clerk NOT in node_modules - good')
+    }
     if (!isServer) {
       console.log('[Clerk] All @clerk/* packages aliased to stub')
     }
