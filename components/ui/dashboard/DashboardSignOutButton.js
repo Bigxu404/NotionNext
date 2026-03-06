@@ -1,4 +1,4 @@
-import { SignOutButton } from '@clerk/nextjs'
+import { SignOutButton } from '@/lib/clerk-stub'
 /**
  * 控制台登出按钮
  * @returns

@@ -2,7 +2,7 @@
 import DashboardButton from '@/components/ui/dashboard/DashboardButton'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton } from '@/lib/clerk-stub'
 import throttle from 'lodash.throttle'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

@@ -196,7 +196,7 @@ const nextConfig = {
           }
         ]
       },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev, isServer, webpack }) => {
     config.resolve.alias['@'] = path.resolve(__dirname)
 
     if (!isServer) {
@@ -220,11 +220,13 @@ const nextConfig = {
     config.resolve.alias['@clerk/backend$'] = clerkStub
     config.resolve.alias['@clerk/types$'] = clerkStub
 
-    // NormalModuleReplacementPlugin approach (suspenders) - catches ANY @clerk/ import
-    const webpack = require('webpack')
+    // NormalModuleReplacementPlugin - catches ANY @clerk/ import at resolution level
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(/^@clerk\//, resource => {
         resource.request = clerkStub
+        if (!isServer) {
+          console.log('[Clerk Plugin] Intercepted:', resource.request)
+        }
       })
     )
 
