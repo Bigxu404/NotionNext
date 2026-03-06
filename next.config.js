@@ -209,6 +209,8 @@ const nextConfig = {
     )
 
     const clerkStub = path.resolve(__dirname, 'lib', 'clerk-stub.js')
+
+    // Alias approach (belt)
     config.resolve.alias['@clerk/nextjs$'] = clerkStub
     config.resolve.alias['@clerk/nextjs/server'] = clerkStub
     config.resolve.alias['@clerk/localizations$'] = clerkStub
@@ -218,15 +220,21 @@ const nextConfig = {
     config.resolve.alias['@clerk/backend$'] = clerkStub
     config.resolve.alias['@clerk/types$'] = clerkStub
 
+    // NormalModuleReplacementPlugin approach (suspenders) - catches ANY @clerk/ import
+    const webpack = require('webpack')
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(/^@clerk\//, resource => {
+        resource.request = clerkStub
+      })
+    )
+
     const clerkDir = path.join(__dirname, 'node_modules', '@clerk')
     if (fs.existsSync(clerkDir)) {
       console.log('[DEBUG] @clerk IN node_modules:', fs.readdirSync(clerkDir))
     } else {
       console.log('[DEBUG] @clerk NOT in node_modules - good')
     }
-    if (!isServer) {
-      console.log('[Clerk] All @clerk/* packages aliased to stub')
-    }
+    console.log('[Clerk] All @clerk/* imports redirected to stub via alias + plugin')
 
     if (process.env.NODE_ENV_API === 'development') {
       config.devtool = 'source-map'
