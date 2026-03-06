@@ -238,46 +238,6 @@ const nextConfig = {
     }
     console.log('[Clerk] All @clerk/* imports redirected to stub via alias + plugin')
 
-    // Deep search for @clerk anywhere in node_modules (nested)
-    const { execSync } = require('child_process')
-    try {
-      const found = execSync('find node_modules -path "*@clerk*" -maxdepth 5 2>/dev/null | head -20', { encoding: 'utf-8', timeout: 5000 })
-      console.log('[DEBUG] Deep @clerk search:', found || 'NONE FOUND')
-    } catch(e) {
-      console.log('[DEBUG] Deep @clerk search: NONE FOUND')
-    }
-
-    // After build: dump chunk 32228 content around error positions
-    if (isServer) {
-      config.plugins.push({
-        apply(compiler) {
-          compiler.hooks.done.tap('ChunkDebugPlugin', () => {
-            try {
-              const chunkPath = path.join(compiler.outputPath, 'chunks', '32228.js')
-              if (fs.existsSync(chunkPath)) {
-                const content = fs.readFileSync(chunkPath, 'utf-8')
-                console.log('[CHUNK 32228] Total size:', content.length)
-                console.log('[CHUNK 32228] @57700-57900:', content.substring(57700, 57900))
-                console.log('[CHUNK 32228] @8100-8350:', content.substring(8100, 8350))
-                console.log('[CHUNK 32228] @13300-13500:', content.substring(13300, 13500))
-                console.log('[CHUNK 32228] @58400-58600:', content.substring(58400, 58600))
-              } else {
-                const serverDir = compiler.outputPath
-                const chunksDir = path.join(serverDir, 'chunks')
-                if (fs.existsSync(chunksDir)) {
-                  const files = fs.readdirSync(chunksDir).filter(f => f.includes('32228'))
-                  console.log('[CHUNK DEBUG] Files matching 32228:', files)
-                } else {
-                  console.log('[CHUNK DEBUG] No chunks dir at:', chunksDir)
-                }
-              }
-            } catch(e) {
-              console.log('[CHUNK DEBUG] Error:', e.message)
-            }
-          })
-        }
-      })
-    }
 
     if (process.env.NODE_ENV_API === 'development') {
       config.devtool = 'source-map'

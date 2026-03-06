@@ -45,7 +45,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* 图片封面 */}
         {showPageCover && (
           <div className='md:w-5/12 overflow-hidden'>
-            <Link href={post?.href}>
+            <Link href={post?.href || '/'}>
               <>
                 <LazyImage
                   priority={index === 1}

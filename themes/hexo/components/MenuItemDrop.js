@@ -37,7 +37,7 @@ export const MenuItemDrop = ({ link }) => {
               <li
                 key={index}
                 className='cursor-pointer hover:bg-indigo-500 hover:text-white tracking-widest transition-all duration-200 dark:border-gray-800 py-2 pr-8 pl-4'>
-                <Link href={sLink.href} target={link?.target}>
+                <Link href={sLink.href || '#'} target={link?.target}>
                   <span className='text-sm text-nowrap font-extralight'>
                     {sLink?.icon && <i className={sLink?.icon + ' mr-2'}></i>}
                     {sLink.title}

@@ -38,7 +38,7 @@ export default function ArticleRecommend({ recommendPosts, siteInfo }) {
             <Link
               key={post.id}
               title={post.title}
-              href={post?.href}
+              href={post?.href || '/'}
               passHref
               className='flex h-40 cursor-pointer overflow-hidden'>
               <div className='h-full w-full relative group'>

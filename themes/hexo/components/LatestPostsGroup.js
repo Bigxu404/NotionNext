@@ -37,7 +37,7 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
           <Link
             key={post.id}
             title={post.title}
-            href={post?.href}
+            href={post?.href || '/'}
             passHref
             className={'my-3 flex'}>
             <div className='w-20 h-14 overflow-hidden relative'>

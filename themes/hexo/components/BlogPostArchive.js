@@ -28,7 +28,7 @@ const BlogPostArchive = ({ posts = [], archiveTitle }) => {
                   <span className='text-gray-400 shrink-0'>{post.date?.start_date}</span>
                   &nbsp;
                   <Link
-                    href={post?.href}
+                    href={post?.href || '/'}
                     passHref
                     className='dark:text-gray-400 dark:hover:text-indigo-300 overflow-x-hidden hover:underline cursor-pointer text-gray-600 flex-grow'>
                     {post.title}

@@ -25,7 +25,7 @@ export const BlogPostCardInfo = ({
           <h2>
             {/* 标题 */}
             <Link
-              href={post?.href}
+              href={post?.href || '/'}
               passHref
               className={`line-clamp-2 replace cursor-pointer text-2xl ${
                 showPreview ? 'text-center' : ''
