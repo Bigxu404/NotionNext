@@ -37,11 +37,9 @@ const Hero = props => {
               showCursor: true,
               smartBackspace: true,
               onComplete: (self) => {
-                setTimeout(() => {
-                  if (self?.cursor) {
-                    self.cursor.style.display = 'none'
-                  }
-                }, 1500)
+                if (self?.cursor) {
+                  self.cursor.style.display = 'none'
+                }
               }
             })
           )

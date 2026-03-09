@@ -109,7 +109,7 @@ const Style = () => {
         }
     }
     .animate-slow-bounce {
-        animation: slow-bounce 2s infinite;
+        animation: slow-bounce 3s infinite;
     }
 
   `}</style>)
