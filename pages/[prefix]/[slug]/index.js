@@ -35,6 +35,8 @@ export async function getStaticPaths() {
       params: { prefix: row.slug.split('/')[0], slug: row.slug.split('/')[1] }
     }))
 
+  console.log('[PREFIX-SLUG-PATHS] found', paths?.length, 'paths for prefix/slug. Examples:', paths?.slice(0, 3));
+
   // 增加一种访问路径 允许通过 [category]/[slug] 访问文章
   // 例如文章slug 是 test ，然后文章的分类category是 production
   // 则除了 [domain]/[slug] 以外，还支持分类名访问: [domain]/[category]/[slug]

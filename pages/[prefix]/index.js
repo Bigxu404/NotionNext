@@ -109,6 +109,9 @@ export async function getStaticPaths() {
   const paths = allPages
     ?.filter(row => checkSlugHasNoSlash(row))
     .map(row => ({ params: { prefix: row.slug } }))
+  
+  console.log('[PREFIX-PATHS] found', paths?.length, 'paths for prefix. Examples:', paths?.slice(0, 3));
+
   return {
     paths: paths,
     fallback: true
@@ -134,6 +137,8 @@ export async function getStaticProps({ params: { prefix }, locale }) {
       (postSlug === cleanPrefix || p.id === idToUuid(cleanPrefix))
     )
   })
+
+  console.log(`[getStaticProps] cleanPrefix: ${cleanPrefix}, found post: ${!!props.post}, isFallback: ${false}`)
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
