@@ -52,7 +52,7 @@ const SEO = props => {
   }
   const TITLE = siteConfig('TITLE')
   const title = meta?.title || TITLE
-  const description = meta?.description || `${siteInfo?.description}`
+  const description = meta?.description || post?.['Agent摘要'] || post?.ext?.Agent摘要 || `${siteInfo?.description}`
   const type = meta?.type || 'website'
   const lang = siteConfig('LANG').replace('-', '_') // Facebook OpenGraph 要 zh_CN 這樣的格式才抓得到語言
   const category = meta?.category || KEYWORDS // section 主要是像是 category 這樣的分類，Facebook 用這個來抓連結的分類
@@ -271,7 +271,7 @@ const getSEOMeta = (props, router, locale) => {
         title: post
           ? `${post?.title} | ${siteInfo?.title}`
           : `${siteInfo?.title} | loading`,
-        description: post?.summary,
+        description: post?.['Agent摘要'] || post?.ext?.Agent摘要 || post?.summary,
         type: post?.type,
         slug: post?.slug,
         image: post?.pageCoverThumbnail || `${siteInfo?.pageCover}`,

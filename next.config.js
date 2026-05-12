@@ -166,6 +166,10 @@ const nextConfig = {
         }
 
         return [
+          {
+            source: '/llms.txt',
+            destination: '/api/llms-txt'
+          },
           ...langsRewrites,
           // 伪静态重写
           {

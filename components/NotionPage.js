@@ -144,6 +144,11 @@ const NotionPage = ({ post, className }) => {
 
       <AdEmbed />
       <PrismMac />
+
+      {/* Agent 结构化摘要 */}
+      {(post?.['Agent摘要'] || post?.ext?.Agent摘要) && (
+        <div dangerouslySetInnerHTML={{ __html: `\n<!-- AGENT_SUMMARY\n${post?.['Agent摘要'] || post?.ext?.Agent摘要}\nAGENT_SUMMARY -->\n` }} />
+      )}
     </div>
   )
 }

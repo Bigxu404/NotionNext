@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "headers": []
+  "headers": [],
+  "rewrites": [
+    {
+      "source": "/llms.txt",
+      "destination": "/api/llms-txt"
+    }
+  ]
 }
