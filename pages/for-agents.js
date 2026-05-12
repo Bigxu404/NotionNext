@@ -35,13 +35,13 @@ export default function ForAgents({ siteInfo, posts }) {
   return (
     <>
       <Head>
-        <title>For Agents | {siteInfo.title || 'masterxu.online'}</title>
+        <title>For Agents | {siteInfo.title || 'goodxu.cn'}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <div className="mb-10">
-            <h1 className="text-3xl font-bold mb-6">{siteInfo.title || 'masterxu.online'} — for Agents</h1>
+            <h1 className="text-3xl font-bold mb-6">{siteInfo.title || 'goodxu.cn'} — for Agents</h1>
             
             <div className="mb-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
               <h2 className="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">欢迎语</h2>

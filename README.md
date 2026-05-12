@@ -1,11 +1,11 @@
-# masterxu.online — 阿旭的个人博客
+# goodxu.cn — 阿旭的个人博客
 
-这是 [阿旭](https://www.masterxu.online) 的个人博客源码仓库。
+这是 [阿旭](https://www.goodxu.cn) 的个人博客源码仓库。
 
 本博客基于优秀的开源项目 [NotionNext](https://github.com/tangly1024/NotionNext) 构建，通过 Notion 进行内容的数据管理和无缝发布。
 
 ## 🌐 访问地址
-👉 **[www.masterxu.online](https://www.masterxu.online)**
+👉 **[www.goodxu.cn](https://www.goodxu.cn)**
 
 ## 💡 站点定位
 本博客主要记录：
